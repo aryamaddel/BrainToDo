@@ -42,7 +42,7 @@ const createTaskListItem = ({ id, name, status }) => {
 
         deleteTaskButton.addEventListener("click", () => {
             tasks = tasks.filter(task => task.id !== id);
-            displayTasks();
+            listItem.remove();
         })
 
         listItem.append(deleteTaskButton);
