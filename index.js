@@ -6,7 +6,7 @@ const updateProgressBar = () => {
     const completedTasks = tasks.filter(task => task.status).length;
     progressBar.max = tasks.length;
     progressBar.value = completedTasks;
-}
+};
 
 const createTask = name => ({
     id: ++taskIdCounter,
@@ -23,12 +23,12 @@ const addTask = () => {
         tasks.push(createTask(taskName));
         displayTasks();
     }
-}
+};
 
 const createTaskListItem = ({ id, name, status }) => {
     const listItem = document.createElement("li");
-
     const checkboxElement = document.createElement("input");
+
     checkboxElement.type = "checkbox";
     checkboxElement.name = name;
     checkboxElement.id = `task-${id}`;
@@ -57,7 +57,7 @@ const createTaskListItem = ({ id, name, status }) => {
     }
 
     return listItem;
-}
+};
 
 
 const displayTasks = () => {
@@ -68,16 +68,16 @@ const displayTasks = () => {
     ctasksListElement.innerHTML = "";
 
     tasks.forEach(task => {
-        (task.status ? ctasksListElement : ptasksListElement).appendChild(createTaskListItem(task));
+        const taskListItem = createTaskListItem(task);
+        (task.status ? ctasksListElement : ptasksListElement).appendChild(taskListItem);
     });
 
     updateProgressBar();
-}
-
+};
 const clearCompletedTasks = () => {
     tasks = tasks.filter(task => !task.status);
     displayTasks();
-}
+};
 
 
 function updateTime() {
@@ -107,7 +107,7 @@ window.onload = function () {
     updateTime();
 };
 
-function startTimer() {
+const startTimer = () => {
     const timeInputField = document.getElementById('time-input-field');
     const remainingTimeLabel = document.getElementById('remaining-time');
     const timerProgressBar = document.getElementById('timer-progress-bar');
@@ -124,7 +124,7 @@ function startTimer() {
         timerProgressBar.value = remainingTimeInSeconds;
         if (remainingTimeInSeconds <= 0) {
             clearInterval(countdownInterval);
-            alert('timer expired!');
+            alert('Timer expired!');
         }
     }, 1000);
-}
+};
