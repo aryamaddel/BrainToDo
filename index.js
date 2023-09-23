@@ -2,7 +2,7 @@ let tasks = [];
 let taskIdCounter = 0;
 
 const updateProgressBar = () => {
-    const progressBar = document.getElementById("task-progress-bar");
+    const progressBar = document.querySelector("#task-progress-bar");
     const completedTasks = tasks.filter(task => task.status).length;
     progressBar.max = tasks.length;
     progressBar.value = completedTasks;
@@ -15,7 +15,7 @@ const createTask = name => ({
 });
 
 const addTask = () => {
-    const taskInputElement = document.getElementById("task-input");
+    const taskInputElement = document.querySelector("#task-input");
     const taskName = taskInputElement.value.trim();
     taskInputElement.value = "";
 
@@ -61,8 +61,8 @@ const createTaskListItem = ({ id, name, status }) => {
 
 
 const displayTasks = () => {
-    const ptasksListElement = document.getElementById("ptasks");
-    const ctasksListElement = document.getElementById("ctasks");
+    const ptasksListElement = document.querySelector("#ptasks");
+    const ctasksListElement = document.querySelector("#ctasks");
 
     ptasksListElement.innerHTML = "";
     ctasksListElement.innerHTML = "";
@@ -84,7 +84,7 @@ function updateTime() {
     const date = new Date();
 
     // Pad single digit minutes and seconds with a leading zero
-    let hours = date.getHours();
+    let hours = date.getHours().toString().padStart(2, '0');;
     const minutes = date.getMinutes().toString().padStart(2, '0');
     const seconds = date.getSeconds().toString().padStart(2, '0');
 
@@ -93,24 +93,22 @@ function updateTime() {
     if (hours < 12) {
         time = `${hours}:${minutes}:${seconds} AM`;
     } else if (hours > 12) {
-        hours = hours - 12;
+        hours -= 12;
         time = `${hours}:${minutes}:${seconds} PM`;
     }
 
-    document.getElementById('time-heading').textContent = time;
+    document.querySelector('#time-heading').textContent = time;
 
     setTimeout(updateTime, 1000);
 }
 
 
-window.onload = function () {
-    updateTime();
-};
+window.onload = updateTime;
 
 const startTimer = () => {
-    const timeInputField = document.getElementById('time-input-field');
-    const remainingTimeLabel = document.getElementById('remaining-time');
-    const timerProgressBar = document.getElementById('timer-progress-bar');
+    const timeInputField = document.querySelector('#time-input-field');
+    const remainingTimeLabel = document.querySelector('#remaining-time');
+    const timerProgressBar = document.querySelector('#timer-progress-bar');
 
     const inputTimeInSeconds = timeInputField.valueAsNumber / 1000;
     let remainingTimeInSeconds = inputTimeInSeconds;
@@ -118,12 +116,16 @@ const startTimer = () => {
     timerProgressBar.max = inputTimeInSeconds;
     timerProgressBar.value = inputTimeInSeconds;
 
-    let countdownInterval = setInterval(() => {
+    let countdownIntervalId;
+
+    countdownIntervalId && clearInterval(countdownIntervalId);
+
+    countdownIntervalId = setInterval(() => {
         remainingTimeInSeconds--;
         remainingTimeLabel.textContent = `Remaining Time: ${remainingTimeInSeconds} seconds`;
         timerProgressBar.value = remainingTimeInSeconds;
         if (remainingTimeInSeconds <= 0) {
-            clearInterval(countdownInterval);
+            clearInterval(countdownIntervalId);
             alert('Timer expired!');
         }
     }, 1000);
