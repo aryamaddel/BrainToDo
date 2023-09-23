@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Todo App</h1>
+  </header>
+  <main>
+
+    <section class="pending-tasks">
+      <h2>Pending Tasks</h2>
+      <input type="text" name="enterTask" id="task-input">
+      <input type="submit" name="submitTask" id="submit-task-input" value="ADD" onclick="addTask()">
+      <ul id="ptasks"></ul>
+    </section>
+
+    <section class="completed-tasks">
+      <h2>Completed Tasks</h2>
+      <ul id="ctasks"></ul>
+      <input type="button" value="Clear completed tasks" id="">
+    </section>
+  </main>
+
+  <footer>
+    <p>made by arya❤️</p>
+  </footer>
+
+</body>
+
+</html>
