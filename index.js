@@ -83,8 +83,7 @@ const clearCompletedTasks = () => {
 function updateTime() {
     const date = new Date();
 
-    // Pad single digit minutes and seconds with a leading zero
-    let hours = date.getHours().toString().padStart(2, '0');;
+    let hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
     const seconds = date.getSeconds().toString().padStart(2, '0');
 
@@ -94,6 +93,8 @@ function updateTime() {
         time = `${hours}:${minutes}:${seconds} AM`;
     } else if (hours > 12) {
         hours -= 12;
+        time = `${hours}:${minutes}:${seconds} PM`;
+    } else if (hours == 12) {
         time = `${hours}:${minutes}:${seconds} PM`;
     }
 
