@@ -1,6 +1,13 @@
 let tasks = [];
 let taskIdCounter = 0;
 
+const updateProgressBar = () => {
+    const progressBar = document.getElementById("task-progress-bar");
+    const completedTasks = tasks.filter(task => task.status).length;
+    progressBar.max = tasks.length;
+    progressBar.value = completedTasks;
+}
+
 const createTask = name => ({
     id: ++taskIdCounter,
     name,
@@ -43,6 +50,7 @@ const createTaskListItem = ({ id, name, status }) => {
         deleteTaskButton.addEventListener("click", () => {
             tasks = tasks.filter(task => task.id !== id);
             listItem.remove();
+            updateProgressBar()
         })
 
         listItem.append(deleteTaskButton);
@@ -55,16 +63,46 @@ const createTaskListItem = ({ id, name, status }) => {
 const displayTasks = () => {
     const ptasksListElement = document.getElementById("ptasks");
     const ctasksListElement = document.getElementById("ctasks");
-    
+
     ptasksListElement.innerHTML = "";
     ctasksListElement.innerHTML = "";
 
     tasks.forEach(task => {
         (task.status ? ctasksListElement : ptasksListElement).appendChild(createTaskListItem(task));
     });
+
+    updateProgressBar();
 }
 
 const clearCompletedTasks = () => {
     tasks = tasks.filter(task => !task.status);
     displayTasks();
 }
+
+
+function updateTime() {
+    const date = new Date();
+
+    // Pad single digit minutes and seconds with a leading zero
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+
+    let time;
+
+    if (hours < 12) {
+        time = `${hours}:${minutes}:${seconds} AM`;
+    } else if (hours > 12) {
+        hours = hours - 12;
+        time = `${hours}:${minutes}:${seconds} PM`;
+    }
+
+    document.getElementById('time-heading').textContent = time;
+
+    setTimeout(updateTime, 1000);
+}
+
+
+window.onload = function () {
+    updateTime();
+};
