@@ -1,51 +1,58 @@
 let tasks = [];
 let taskIdCounter = 0;
 
-function createTask(name) {
-    taskIdCounter++;
-    return {
-        id: taskIdCounter,
-        name: name,
-        status: false,
-    };
-}
+const createTask = name => ({
+    id: ++taskIdCounter,
+    name,
+    status: false
+});
 
-function addTask() {
+const addTask = () => {
     const taskInputElement = document.getElementById("task-input");
     const taskName = taskInputElement.value.trim();
-
     taskInputElement.value = "";
 
     if (taskName !== "") {
-        const newTask = createTask(taskName);
-        tasks.push(newTask);
-        displayTasks(); 
+        tasks.push(createTask(taskName));
+        displayTasks();
     }
 }
 
-function createTaskListItem(task) {
+const createTaskListItem = ({ id, name, status }) => {
     const listItem = document.createElement("li");
 
     const checkboxElement = document.createElement("input");
     checkboxElement.type = "checkbox";
-    checkboxElement.name = task.name;
-    checkboxElement.id = `task-${task.id}`;
-    checkboxElement.checked = task.status;
-
-    const taskNameTextNode = document.createTextNode(task.name);
+    checkboxElement.name = name;
+    checkboxElement.id = `task-${id}`;
+    checkboxElement.checked = status;
 
     checkboxElement.addEventListener("change", () => {
-        task.status = checkboxElement.checked;
-        displayTasks(); 
+        tasks.find(task => task.id === id).status = checkboxElement.checked;
+        displayTasks();
     });
 
-    listItem.appendChild(checkboxElement);
-    listItem.appendChild(taskNameTextNode);
+    listItem.append(checkboxElement, `${name} `);
+
+    if (!status) {
+        const deleteTaskButton = document.createElement("input");
+        deleteTaskButton.type = "button";
+        deleteTaskButton.value = "Delete";
+        deleteTaskButton.id = `delete-${id}`;
+
+        deleteTaskButton.addEventListener("click", () => {
+            tasks = tasks.filter(task => task.id !== id);
+            displayTasks();
+        })
+
+        listItem.append(deleteTaskButton);
+    }
 
     return listItem;
 }
 
-function displayTasks() {
+
+const displayTasks = () => {
     const ptasksListElement = document.getElementById("ptasks");
     const ctasksListElement = document.getElementById("ctasks");
     
@@ -53,7 +60,11 @@ function displayTasks() {
     ctasksListElement.innerHTML = "";
 
     tasks.forEach(task => {
-        const listItem = createTaskListItem(task);
-        (task.status ? ctasksListElement : ptasksListElement).appendChild(listItem);
+        (task.status ? ctasksListElement : ptasksListElement).appendChild(createTaskListItem(task));
     });
+}
+
+const clearCompletedTasks = () => {
+    tasks = tasks.filter(task => !task.status);
+    displayTasks();
 }
