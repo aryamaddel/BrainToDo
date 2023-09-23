@@ -38,8 +38,9 @@
     </section>
 
     <section class="time-input-section">
-      <input type="time" id="time-input-field" name="timeInput">
-      <h2 id="remaining-time">Time Remaining: </h2>
+      <input type="time" id="time-input-field" name="timeInput" step="1">
+      <input type="submit" value="Start" onclick="startTimer()">
+      <label id="remaining-time"></label>
       <progress id="timer-progress-bar" value="0" max="100"></progress>
     </section>
 

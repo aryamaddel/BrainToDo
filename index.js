@@ -106,3 +106,25 @@ function updateTime() {
 window.onload = function () {
     updateTime();
 };
+
+function startTimer() {
+    const timeInputField = document.getElementById('time-input-field');
+    const remainingTimeLabel = document.getElementById('remaining-time');
+    const timerProgressBar = document.getElementById('timer-progress-bar');
+
+    const inputTimeInSeconds = timeInputField.valueAsNumber / 1000;
+    let remainingTimeInSeconds = inputTimeInSeconds;
+
+    timerProgressBar.max = inputTimeInSeconds;
+    timerProgressBar.value = inputTimeInSeconds;
+
+    let countdownInterval = setInterval(() => {
+        remainingTimeInSeconds--;
+        remainingTimeLabel.textContent = `Remaining Time: ${remainingTimeInSeconds} seconds`;
+        timerProgressBar.value = remainingTimeInSeconds;
+        if (remainingTimeInSeconds <= 0) {
+            clearInterval(countdownInterval);
+            alert('timer expired!');
+        }
+    }, 1000);
+}
