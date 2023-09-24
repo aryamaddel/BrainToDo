@@ -1,6 +1,8 @@
+// Initialize tasks and task ID counter
 let tasks = [];
 let taskIdCounter = 0;
 
+// Function to update the progress bar based on completed tasks
 const updateProgressBar = () => {
     const progressBar = document.querySelector("#task-progress-bar");
     const completedTasks = tasks.filter(task => task.status).length;
@@ -8,12 +10,14 @@ const updateProgressBar = () => {
     progressBar.value = completedTasks;
 };
 
+// Function to create a task object
 const createTask = name => ({
     id: ++taskIdCounter,
     name,
     status: false
 });
 
+// Function to add a task
 const addTask = () => {
     const taskInputElement = document.querySelector("#task-input");
     const taskName = taskInputElement.value.trim();
@@ -25,6 +29,7 @@ const addTask = () => {
     }
 };
 
+// Function to create a task list item
 const createTaskListItem = ({ id, name, status }) => {
     const listItem = document.createElement("li");
     const checkboxElement = document.createElement("input");
@@ -50,8 +55,8 @@ const createTaskListItem = ({ id, name, status }) => {
         deleteTaskButton.addEventListener("click", () => {
             tasks = tasks.filter(task => task.id !== id);
             listItem.remove();
-            updateProgressBar()
-        })
+            updateProgressBar();
+        });
 
         listItem.append(deleteTaskButton);
     }
@@ -59,7 +64,7 @@ const createTaskListItem = ({ id, name, status }) => {
     return listItem;
 };
 
-
+// Function to display tasks in different lists
 const displayTasks = () => {
     const ptasksListElement = document.querySelector("#ptasks");
     const ctasksListElement = document.querySelector("#ctasks");
@@ -74,12 +79,14 @@ const displayTasks = () => {
 
     updateProgressBar();
 };
+
+// Function to clear completed tasks
 const clearCompletedTasks = () => {
     tasks = tasks.filter(task => !task.status);
     displayTasks();
 };
 
-
+// Function to update the time display
 function updateTime() {
     const date = new Date();
 
@@ -103,9 +110,10 @@ function updateTime() {
     setTimeout(updateTime, 1000);
 }
 
-
+// Call updateTime on window load to start the time display
 window.onload = updateTime;
 
+// Function to start a timer
 const startTimer = () => {
     const timeInputField = document.querySelector('#time-input-field');
     const remainingTimeLabel = document.querySelector('#remaining-time');
@@ -115,19 +123,27 @@ const startTimer = () => {
     let remainingTimeInSeconds = inputTimeInSeconds;
 
     timerProgressBar.max = inputTimeInSeconds;
-    timerProgressBar.value = inputTimeInSeconds;
+    timerProgressBar.value = remainingTimeInSeconds;
 
     let countdownIntervalId;
 
     countdownIntervalId && clearInterval(countdownIntervalId);
 
     countdownIntervalId = setInterval(() => {
-        remainingTimeInSeconds--;
-        remainingTimeLabel.textContent = `Remaining Time: ${remainingTimeInSeconds} seconds`;
+        const hours = Math.floor(remainingTimeInSeconds / 3600);
+        const minutes = Math.floor((remainingTimeInSeconds % 3600) / 60);
+        const seconds = remainingTimeInSeconds % 60;
+
+        const formattedTime = `${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
+
+        remainingTimeLabel.textContent = `Remaining Time: ${formattedTime}`;
         timerProgressBar.value = remainingTimeInSeconds;
+
         if (remainingTimeInSeconds <= 0) {
             clearInterval(countdownIntervalId);
             alert('Timer expired!');
         }
+
+        remainingTimeInSeconds--;
     }, 1000);
 };
