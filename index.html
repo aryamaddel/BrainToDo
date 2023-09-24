@@ -11,38 +11,48 @@
 
 <body>
   <header>
-    <h1>Todo App</h1>
+    <h1 class="title">Todo</h1>
   </header>
   <main>
+    <section class="top">
+      <section class="main-container">
+        <div class="tasks-container">
+          <div class="tasks">
+            <h2>Pending Tasks</h2>
+            <input type="text" name="enterTask" id="task-input">
+            <input type="submit" name="submitTask" id="submit-task-input" value="ADD" onclick="addTask()">
+            <ul id="ptasks"></ul>
+          </div>
 
-    <section class="pending-tasks">
-      <h2>Pending Tasks</h2>
-      <input type="text" name="enterTask" id="task-input">
-      <input type="submit" name="submitTask" id="submit-task-input" value="ADD" onclick="addTask()">
-      <ul id="ptasks"></ul>
+          <div class="tasks">
+            <h2>Completed Tasks</h2>
+            <ul id="ctasks"></ul>
+            <input type="button" value="Clear completed tasks" id="clear-completed-tasks-button"
+              onclick="clearCompletedTasks()">
+          </div>
+        </div>
+
+        <section class="task-progress-section">
+          <progress id="task-progress-bar" value="0" max="100"></progress>
+        </section>
+      </section>
+
+
+      <section class="time-container">
+        <div class="time-display">
+          <h1 id="time-heading"></h1>
+        </div>
+
+        <div class="time-input-section">
+          <input type="time" id="time-input-field" name="timeInput" step="1">
+          <input type="submit" value="Start" onclick="startTimer()">
+          <label id="remaining-time"></label>
+          <progress id="timer-progress-bar" value="0" max="100"></progress>
+        </div>
+      </section>
     </section>
 
-    <section class="completed-tasks">
-      <h2>Completed Tasks</h2>
-      <ul id="ctasks"></ul>
-      <input type="button" value="Clear completed tasks" id="clear-completed-tasks-button"
-        onclick="clearCompletedTasks()">
-    </section>
 
-    <section class="task-progress-section">
-      <progress id="task-progress-bar" value="0" max="100"></progress>
-    </section>
-
-    <section class="time-display">
-      <h1 id="time-heading"></h1>
-    </section>
-
-    <section class="time-input-section">
-      <input type="time" id="time-input-field" name="timeInput" step="1">
-      <input type="submit" value="Start" onclick="startTimer()">
-      <label id="remaining-time"></label>
-      <progress id="timer-progress-bar" value="0" max="100"></progress>
-    </section>
 
   </main>
 
