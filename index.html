@@ -44,10 +44,12 @@
         </div>
 
         <div class="time-input-section">
-          <input type="time" id="time-input-field" name="timeInput" step="1">
-          <input type="submit" value="Start" onclick="startTimer()">
-          <label id="remaining-time"></label>
-          <progress id="timer-progress-bar" value="0" max="100"></progress>
+          <div class="time-side"> <input type="time" id="time-input-field" name="timeInput" step="1">
+            <input type="submit" value="Start" onclick="startTimer()">
+            <label id="remaining-time"></label>
+          </div>
+          <div class="progress-side"><progress id="timer-progress-bar" value="0" max="100"></progress></div>
+
         </div>
       </section>
     </section>

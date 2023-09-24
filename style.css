@@ -1,0 +1,151 @@
+html,
+body {
+    margin: 0;
+    background-color: darkslategray;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.title {
+    margin: 0;
+    padding: 0.75em;
+    background-color: darkolivegreen;
+}
+
+.top {
+    display: flex;
+    margin: 1rem;
+    justify-content: space-between;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.tasks-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tasks {
+    padding: 1rem;
+}
+
+.tasks input[type=text] {
+    padding: 0.5rem;
+}
+
+.tasks input[type=submit] {
+    padding: 0.5rem;
+    color: aliceblue;
+    background-color: #3EB39F;
+    border: none;
+}
+
+#ptasks {
+    padding: 1rem;
+    list-style: none;
+    margin: 0;
+}
+
+#ptasks li {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+
+#ptasks li input[type=button] {
+    margin-left: 0.5rem;
+    color: white;
+    background-color: #BF565A;
+    border: none;
+}
+
+#ctasks {
+    padding: 1rem;
+    list-style: none;
+    margin: 0;
+}
+
+#ctasks li {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+#clear-completed-tasks-button {
+    width: 100%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    color: white;
+    background-color: #BF565A;
+    border: 1px solid white;
+}
+
+#task-progress-bar {
+    width: 100%;
+}
+
+.time-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.time-display {
+    display: flex;
+    height: 39vh;
+    text-align: center;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.time-display h1 {
+    font-size: 4rem;
+}
+
+.time-input-section {
+    display: flex;
+    height: 39vh;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.time-side {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    width: 100%;
+}
+
+.time-side input[type=time] {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 2rem;
+}
+
+.time-side input[type=submit] {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 1.5rem;
+}
+.progress-side{width: 100%;}
+#timer-progress-bar{
+    transform: rotate(-90deg);
+    width: 100%;
+
+}
+
+
+footer {
+    background-color: black;
+    padding: 0.25rem;
+    text-align: center;
+    color: white;
+    text-align: center;
+}
